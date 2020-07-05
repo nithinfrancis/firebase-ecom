@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "403562326268",
+    "firebase_url": "https://ecom-e83cf.firebaseio.com",
+    "project_id": "ecom-e83cf",
+    "storage_bucket": "ecom-e83cf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:403562326268:android:550bee732e095be8cacf79",
+        "android_client_info": {
+          "package_name": "com.stockernet.ecom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "403562326268-knu66dutlvlv0g9r0isi92rpbrghj14s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCne1AgZuyAML7tn3VqMOSVpBR5vqnnogQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "403562326268-knu66dutlvlv0g9r0isi92rpbrghj14s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

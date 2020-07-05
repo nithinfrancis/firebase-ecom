@@ -26,15 +26,7 @@ class Restaurant {
   String nexturl;
   List<TableMenuList> tableMenuList;
 
-  Restaurant(
-      {this.restaurantId,
-        this.restaurantName,
-        this.restaurantImage,
-        this.tableId,
-        this.tableName,
-        this.branchName,
-        this.nexturl,
-        this.tableMenuList});
+  Restaurant({this.restaurantId, this.restaurantName, this.restaurantImage, this.tableId, this.tableName, this.branchName, this.nexturl, this.tableMenuList});
 
   Restaurant.fromJson(Map<String, dynamic> json) {
     restaurantId = json['restaurant_id'];
@@ -62,8 +54,7 @@ class Restaurant {
     data['branch_name'] = this.branchName;
     data['nexturl'] = this.nexturl;
     if (this.tableMenuList != null) {
-      data['table_menu_list'] =
-          this.tableMenuList.map((v) => v.toJson()).toList();
+      data['table_menu_list'] = this.tableMenuList.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -76,12 +67,7 @@ class TableMenuList {
   String nexturl;
   List<CategoryDishes> categoryDishes;
 
-  TableMenuList(
-      {this.menuCategory,
-        this.menuCategoryId,
-        this.menuCategoryImage,
-        this.nexturl,
-        this.categoryDishes});
+  TableMenuList({this.menuCategory, this.menuCategoryId, this.menuCategoryImage, this.nexturl, this.categoryDishes});
 
   TableMenuList.fromJson(Map<String, dynamic> json) {
     menuCategory = json['menu_category'];
@@ -103,8 +89,7 @@ class TableMenuList {
     data['menu_category_image'] = this.menuCategoryImage;
     data['nexturl'] = this.nexturl;
     if (this.categoryDishes != null) {
-      data['category_dishes'] =
-          this.categoryDishes.map((v) => v.toJson()).toList();
+      data['category_dishes'] = this.categoryDishes.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -119,22 +104,12 @@ class CategoryDishes {
   double dishCalories;
   String dishDescription;
   bool dishAvailability;
-  double dishType;
+  int dishType;
   String nexturl;
   List<AddonCat> addonCat;
+  int qty;
 
-  CategoryDishes(
-      {this.dishId,
-        this.dishName,
-        this.dishPrice,
-        this.dishImage,
-        this.dishCurrency,
-        this.dishCalories,
-        this.dishDescription,
-        this.dishAvailability,
-        this.dishType,
-        this.nexturl,
-        this.addonCat});
+  CategoryDishes({this.dishId, this.dishName, this.dishPrice, this.dishImage, this.dishCurrency, this.dishCalories, this.dishDescription, this.dishAvailability, this.dishType, this.nexturl, this.addonCat});
 
   CategoryDishes.fromJson(Map<String, dynamic> json) {
     dishId = json['dish_id'];
@@ -177,16 +152,11 @@ class CategoryDishes {
 class AddonCat {
   String addonCategory;
   String addonCategoryId;
-  double addonSelection;
+  int addonSelection;
   String nexturl;
   List<Addons> addons;
 
-  AddonCat(
-      {this.addonCategory,
-        this.addonCategoryId,
-        this.addonSelection,
-        this.nexturl,
-        this.addons});
+  AddonCat({this.addonCategory, this.addonCategoryId, this.addonSelection, this.nexturl, this.addons});
 
   AddonCat.fromJson(Map<String, dynamic> json) {
     addonCategory = json['addon_category'];
@@ -223,18 +193,9 @@ class Addons {
   double dishCalories;
   String dishDescription;
   bool dishAvailability;
-  double dishType;
+  int dishType;
 
-  Addons(
-      {this.dishId,
-        this.dishName,
-        this.dishPrice,
-        this.dishImage,
-        this.dishCurrency,
-        this.dishCalories,
-        this.dishDescription,
-        this.dishAvailability,
-        this.dishType});
+  Addons({this.dishId, this.dishName, this.dishPrice, this.dishImage, this.dishCurrency, this.dishCalories, this.dishDescription, this.dishAvailability, this.dishType});
 
   Addons.fromJson(Map<String, dynamic> json) {
     dishId = json['dish_id'];

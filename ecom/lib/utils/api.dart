@@ -18,7 +18,6 @@ class API {
       headers["Content-Type"] = "application/json";
 
       ParsedResponse result = await _networkManager.post(apiUrl, headers: headers);
-      print("pwoliiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
       print(result?.response ?? "NULL RESPONSE");
       if (result?.isOk() ?? false) {
         final modelClassResponse = RestaurantList.fromJsonMap(json.decode(result.response));
