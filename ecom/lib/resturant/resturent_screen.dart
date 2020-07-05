@@ -90,8 +90,8 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
                                     Container(
                                       decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: Colors.red),
                                       child: Text(
-                                        "${globals.orderList?.length ?? 0}",
-                                        style: TextStyle(color: Colors.white),
+                                        " ${globals.orderList?.length ?? 0} ",
+                                        style: TextStyle(color: Colors.white,fontSize: 14),
                                       ),
                                     ),
                                   ],
@@ -114,164 +114,160 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
                       ),
                       body: TabBarView(
                         children: _restaurantList.first.tableMenuList.map((TableMenuList menuList) {
-                          return SingleChildScrollView(
-                            child: (null != menuList.categoryDishes && firstMenu.categoryDishes.isNotEmpty)
-                                ? Container(
-                                    height: 500,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.vertical,
-                                      itemCount: menuList.categoryDishes.length,
-                                      itemBuilder: (context, i) {
-                                        return Column(
+                          return (null != menuList.categoryDishes && firstMenu.categoryDishes.isNotEmpty)
+                              ? ListView.builder(
+                            physics: BouncingScrollPhysics(),
+                                scrollDirection: Axis.vertical,
+                                itemCount: menuList.categoryDishes.length,
+                                itemBuilder: (context, i) {
+                                  return Column(
+                                    children: <Widget>[
+                                      Container(
+                                        padding: EdgeInsets.all(10.0),
+                                        child: (Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           children: <Widget>[
-                                            Container(
-                                              padding: EdgeInsets.all(10.0),
-                                              child: (Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                children: <Widget>[
-                                                  Row(
+                                            Row(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: <Widget>[
+                                                Expanded(
+                                                  child: Column(
                                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    mainAxisAlignment: MainAxisAlignment.start,
                                                     children: <Widget>[
-                                                      Expanded(
-                                                        child: Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          mainAxisAlignment: MainAxisAlignment.start,
-                                                          children: <Widget>[
-                                                            Text(
-                                                              menuList.categoryDishes[i]?.dishName ?? "Food Name",
-                                                              style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500),
-                                                            ),
-                                                            Row(
-                                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                              children: <Widget>[
-                                                                Text("INR ${menuList.categoryDishes[i]?.dishPrice.toString() ?? "100"}",
-                                                                  style: TextStyle(color: Colors.black, fontSize: 15,height: 2, fontWeight: FontWeight.w500),
-                                                                ),
-                                                                Text("${menuList.categoryDishes[i]?.dishCalories.toString() ?? "100"} calories",
-                                                                  style: TextStyle(color: Colors.black, fontSize: 15,height: 2, fontWeight: FontWeight.w500),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            SizedBox(height: 8,),
-                                                            Text(menuList.categoryDishes[i]?.dishDescription ?? "Food Name",
-                                                              style: TextStyle(color: Colors.black54, fontSize: 15, fontWeight: FontWeight.w300),
-                                                            ),
-                                                          ],
-                                                        ),
+                                                      Text(
+                                                        menuList.categoryDishes[i]?.dishName ?? "Food Name",
+                                                        style: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w500),
                                                       ),
-                                                      (null != menuList.categoryDishes[i] && null != menuList.categoryDishes[i].dishImage)
-                                                          ? Container(
-                                                              width: 60.0,
-                                                              height: 70.0,
-                                                              decoration: new BoxDecoration(
-                                                                borderRadius: BorderRadius.circular(3),
-                                                                color: Colors.transparent,
-                                                                image: DecorationImage(
-                                                                  image: NetworkImage(menuList.categoryDishes[i].dishImage),
-                                                                  fit: BoxFit.fill,
-                                                                ),
-                                                              ),
-                                                              margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                                                            )
-                                                          : Container(
-                                                              width: 55.0,
-                                                              height: 55.0,
-                                                              decoration: new BoxDecoration(
-                                                                borderRadius: BorderRadius.circular(55),
-                                                                color: Colors.transparent,
-                                                              ),
-                                                              margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                                                              child: Center(child: Text(menuList.categoryDishes[i]?.dishImage?.substring(0, 1) ?? "A")),
-                                                            ),
+                                                      Row(
+                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                        children: <Widget>[
+                                                          Text("INR ${menuList.categoryDishes[i]?.dishPrice.toString() ?? "100"}",
+                                                            style: TextStyle(color: Colors.black, fontSize: 15,height: 2, fontWeight: FontWeight.w500),
+                                                          ),
+                                                          Text("${menuList.categoryDishes[i]?.dishCalories.toString() ?? "100"} calories",
+                                                            style: TextStyle(color: Colors.black, fontSize: 15,height: 2, fontWeight: FontWeight.w500),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(height: 8,),
+                                                      Text(menuList.categoryDishes[i]?.dishDescription ?? "Food Name",
+                                                        style: TextStyle(color: Colors.black54, fontSize: 15, fontWeight: FontWeight.w300),
+                                                      ),
                                                     ],
                                                   ),
-                                                  SizedBox(height: 8,),
-                                                  Container(
-                                                    height: 40,
-                                                    width: 120,
-                                                    decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(50)), color: Colors.green),
-                                                    padding: EdgeInsets.all(6),
-                                                    child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                      children: <Widget>[
-                                                        InkWell(
-                                                            onTap: () {
-                                                              if (menuList.categoryDishes[i].qty == null) {
-                                                                menuList.categoryDishes[i].qty = 0;
-                                                              }
-                                                              if (menuList.categoryDishes[i].qty != 0) {
-                                                                setState(() {
-                                                                  menuList.categoryDishes[i].qty--;
-                                                                  if (globals.orderList != null && globals.orderList.isNotEmpty) {
-                                                                    if (menuList.categoryDishes[i].qty == 0) {
-                                                                      globals.orderList.remove(menuList.categoryDishes[i]);
-                                                                    } else {
-                                                                      globals.orderList.forEach((element) {
-                                                                        if (element.dishId == menuList.categoryDishes[i].dishId) {
-                                                                          element.qty = menuList.categoryDishes[i].qty;
-                                                                        }
-                                                                      });
-                                                                    }
+                                                ),
+                                                (null != menuList.categoryDishes[i] && null != menuList.categoryDishes[i].dishImage)
+                                                    ? Container(
+                                                        width: 60.0,
+                                                        height: 70.0,
+                                                        decoration: new BoxDecoration(
+                                                          borderRadius: BorderRadius.circular(3),
+                                                          color: Colors.transparent,
+                                                          image: DecorationImage(
+                                                            image: NetworkImage(menuList.categoryDishes[i].dishImage),
+                                                            fit: BoxFit.fill,
+                                                          ),
+                                                        ),
+                                                        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                                                      )
+                                                    : Container(
+                                                        width: 55.0,
+                                                        height: 55.0,
+                                                        decoration: new BoxDecoration(
+                                                          borderRadius: BorderRadius.circular(55),
+                                                          color: Colors.transparent,
+                                                        ),
+                                                        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+                                                        child: Center(child: Text(menuList.categoryDishes[i]?.dishImage?.substring(0, 1) ?? "A")),
+                                                      ),
+                                              ],
+                                            ),
+                                            SizedBox(height: 8,),
+                                            Container(
+                                              height: 40,
+                                              width: 120,
+                                              decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(50)), color: Colors.green),
+                                              padding: EdgeInsets.all(6),
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                children: <Widget>[
+                                                  InkWell(
+                                                      onTap: () {
+                                                        if (menuList.categoryDishes[i].qty == null) {
+                                                          menuList.categoryDishes[i].qty = 0;
+                                                        }
+                                                        if (menuList.categoryDishes[i].qty != 0) {
+                                                          setState(() {
+                                                            menuList.categoryDishes[i].qty--;
+                                                            if (globals.orderList != null && globals.orderList.isNotEmpty) {
+                                                              if (menuList.categoryDishes[i].qty == 0) {
+                                                                globals.orderList.remove(menuList.categoryDishes[i]);
+                                                              } else {
+                                                                globals.orderList.forEach((element) {
+                                                                  if (element.dishId == menuList.categoryDishes[i].dishId) {
+                                                                    element.qty = menuList.categoryDishes[i].qty;
                                                                   }
                                                                 });
                                                               }
-                                                            },
-                                                            child: Icon(Icons.remove, color: Colors.white)),
-                                                        Text("${menuList.categoryDishes[i]?.qty ?? 0}",
-                                                          style: TextStyle(color: Colors.white, fontSize: 15),
-                                                        ),
-                                                        InkWell(
-                                                            onTap: () {
-                                                              if (menuList.categoryDishes[i].qty == null) {
-                                                                menuList.categoryDishes[i].qty = 0;
-                                                              }
-                                                              setState(() {
-                                                                menuList.categoryDishes[i]?.qty++;
-                                                                bool isInCartFlag = false;
-                                                                if (globals.orderList != null && globals.orderList.isNotEmpty) {
-                                                                  globals.orderList.forEach((element) {
-                                                                    if (element.dishId == menuList.categoryDishes[i].dishId) {
-                                                                      element.qty = menuList.categoryDishes[i].qty;
-                                                                      isInCartFlag = true;
-                                                                    }
-                                                                  });
-                                                                }
-                                                                if (!isInCartFlag) {
-                                                                  globals.orderList.add(menuList.categoryDishes[i]);
-                                                                }
-                                                              });
-                                                            },
-                                                            child: Icon(Icons.add, color: Colors.white)),
-                                                      ],
-                                                    ),
+                                                            }
+                                                          });
+                                                        }
+                                                      },
+                                                      child: Icon(Icons.remove, color: Colors.white)),
+                                                  Text("${menuList.categoryDishes[i]?.qty ?? 0}",
+                                                    style: TextStyle(color: Colors.white, fontSize: 15),
                                                   ),
-                                                  (menuList.categoryDishes[i].addonCat != null && menuList.categoryDishes[i].addonCat.isNotEmpty)
-                                                      ? Padding(
-                                                        padding: const EdgeInsets.only(top:4.0,bottom: 4),
-                                                        child: Text(
-                                                            "Customizations available",
-                                                            style: TextStyle(color: Colors.red),
-                                                          ),
-                                                      )
-                                                      : Text(""),
+                                                  InkWell(
+                                                      onTap: () {
+                                                        if (menuList.categoryDishes[i].qty == null) {
+                                                          menuList.categoryDishes[i].qty = 0;
+                                                        }
+                                                        setState(() {
+                                                          menuList.categoryDishes[i]?.qty++;
+                                                          bool isInCartFlag = false;
+                                                          if (globals.orderList != null && globals.orderList.isNotEmpty) {
+                                                            globals.orderList.forEach((element) {
+                                                              if (element.dishId == menuList.categoryDishes[i].dishId) {
+                                                                element.qty = menuList.categoryDishes[i].qty;
+                                                                isInCartFlag = true;
+                                                              }
+                                                            });
+                                                          }
+                                                          if (!isInCartFlag) {
+                                                            globals.orderList.add(menuList.categoryDishes[i]);
+                                                          }
+                                                        });
+                                                      },
+                                                      child: Icon(Icons.add, color: Colors.white)),
                                                 ],
-                                              )),
+                                              ),
                                             ),
-                                            Divider(
-                                              height: 2,
-                                              color: Colors.grey,
-                                            ),
+                                            (menuList.categoryDishes[i].addonCat != null && menuList.categoryDishes[i].addonCat.isNotEmpty)
+                                                ? Padding(
+                                                  padding: const EdgeInsets.only(top:4.0,bottom: 4),
+                                                  child: Text(
+                                                      "Customizations available",
+                                                      style: TextStyle(color: Colors.red),
+                                                    ),
+                                                )
+                                                : Text(""),
                                           ],
-                                        );
-                                      },
-                                    ),
-                                  )
-                                : Center(
-                                    child: Text("Empty data"),
-                                  ),
-                          );
+                                        )),
+                                      ),
+                                      Divider(
+                                        height: 2,
+                                        color: Colors.grey,
+                                      ),
+                                    ],
+                                  );
+                                },
+                              )
+                              : Center(
+                                  child: Text("Empty data"),
+                                );
                         }).toList(),
                       ),
                     ),

@@ -33,13 +33,19 @@ class NavDrawer extends StatelessWidget {
                     ),
                     margin: const EdgeInsets.symmetric(horizontal: 8.0),
                   ),
+                  SizedBox(
+                    height: 8,
+                  ),
                   Text(
                     '${globals.user?.displayName ?? globals.user?.phoneNumber ?? "User Name"}',
-                    style: TextStyle(color: Colors.black, fontSize: 25),
+                    style: TextStyle(color: Colors.black, fontSize: 15),
+                  ),
+                  SizedBox(
+                    height: 8,
                   ),
                   Text(
                     'ID : ${globals.user?.uid ?? ""}',
-                    style: TextStyle(color: Colors.black, fontSize: 25),
+                    style: TextStyle(color: Colors.black, fontSize: 15),
                   ),
                 ],
               ),
