@@ -15,7 +15,7 @@ class RestaurantBloc extends Bloc<RestaurantScreenEvent, RestaurantScreenState> 
       try {
         yield RestaurantLoadingState();
         RestaurantList listOfRestaurant = new RestaurantList();
-          listOfRestaurant = await API().getListFromServer();
+        listOfRestaurant = await API().getListFromServer();///API CALL Starts and wait for the response
         yield RestaurantLoadedState(listOfRestaurant);
       } catch (e) {
         print(e);

@@ -1,4 +1,5 @@
 import 'package:ecom/resturant/resturent_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom/utils/globals.dart' as globals;
 
@@ -50,7 +51,7 @@ class _OrderPageState extends State<OrderPage> {
           ),
           Expanded(
             child: Card(
-              child: ListView.builder(
+              child:(globals.orderList.isNotEmpty)?ListView.builder(
                 scrollDirection: Axis.vertical,
                 itemCount: globals.orderList.length,
                 itemBuilder: (context, i) {
@@ -139,8 +140,10 @@ class _OrderPageState extends State<OrderPage> {
                                           if (globals.orderList != null && globals.orderList.isNotEmpty) {
                                             globals.orderList.forEach((element) {
                                               if (element != null && element.qty != null) {
+                                                ///used to show how many items are present in cart
                                                 items += element.qty;
                                                 if (element.qty != 0) {
+                                                  ///used to show the total amount
                                                   total += element.qty * element.dishPrice;
                                                 }
                                               }
@@ -190,12 +193,12 @@ class _OrderPageState extends State<OrderPage> {
                     )),
                   );
                 },
-              ),
+              ):Center(child: Text("Sorry you have no items in the list"),),
             ),
           ),
           InkWell(
             onTap: () async {
-              if(globals.orderList.isNotEmpty){
+              if (globals.orderList.isNotEmpty) {
                 await showDialog(
                   context: context,
                   child: AlertDialog(
@@ -216,9 +219,9 @@ class _OrderPageState extends State<OrderPage> {
                           width: 70.0,
                           child: Center(
                               child: Text(
-                                "OK",
-                                style: TextStyle(color: Colors.black),
-                              )),
+                            "OK",
+                            style: TextStyle(color: Colors.black),
+                          )),
                         ),
                       ),
                     ],

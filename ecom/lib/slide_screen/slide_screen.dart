@@ -36,6 +36,7 @@ class NavDrawer extends StatelessWidget {
                   SizedBox(
                     height: 8,
                   ),
+                  ///In sign in with google we get display name and image but in phone number authentication we don't get user name property so used phone number
                   Text(
                     '${globals.user?.displayName ?? globals.user?.phoneNumber ?? "User Name"}',
                     style: TextStyle(color: Colors.black, fontSize: 15),
@@ -59,6 +60,7 @@ class NavDrawer extends StatelessWidget {
             leading: Icon(Icons.exit_to_app),
             title: Text('Logout'),
             onTap: () {
+              ///sign out
               googleSignIn.signOut();
               Navigator.of(context).pushAndRemoveUntil(new MaterialPageRoute(builder: (context) => LoginPage()), (Route<dynamic> route) => false);
             },

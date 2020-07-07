@@ -10,7 +10,7 @@ import 'network_manager.dart';
 class API {
   NetworkManager _networkManager = new NetworkManager();
 
-  static final String apiUrl = "https://www.mocky.io/v2/5dfccffc310000efc8d2c1ad";
+  static final String apiUrl = "https://run.mocky.io/v3/06c2bdc7-76f4-40ee-837b-1be2972117e1";
 
   Future<RestaurantList> getListFromServer() async {
     try {

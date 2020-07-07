@@ -27,8 +27,6 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
 
   List<Restaurant> _tempRestaurantList = new List();
 
-  final _searchController = TextEditingController();
-
   @override
   void initState() {
     super.initState();
@@ -53,6 +51,7 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
               messageTextStyle: TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.w400));
           pr.show();
         } else if (state is RestaurantLoadErrorState) {
+          ///can handle error state here
         } else if (state is RestaurantLoadedState) {
           _restaurantList.addAll(state.restaurantList.restaurantList);
           _tempRestaurantList.addAll(state.restaurantList.restaurantList);
@@ -62,13 +61,12 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
       child: BlocBuilder(
         bloc: _bloc,
         builder: (BuildContext context, RestaurantScreenState state) {
-          return (state is RestaurantLoadedState)
+          return (state is RestaurantLoadedState)///this only throw the widget tree if it is in loaded state
               ? MaterialApp(
-//            color: Colors.white,
                   home: DefaultTabController(
                     length: _restaurantList.first.tableMenuList.length,
                     child: Scaffold(
-                      drawer: NavDrawer(),
+                      drawer: NavDrawer(),///Sidebar
                       appBar: AppBar(
                         backgroundColor: Colors.white,
                         iconTheme: IconThemeData(color: Colors.black),
@@ -77,6 +75,7 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
                           children: <Widget>[
                             InkWell(
                               onTap: () {
+                                ///Navigate to Cart Screen
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => OrderPage()));
                               },
                               child: Container(
@@ -194,20 +193,28 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
                                               child: Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                                 children: <Widget>[
+                                                  ///Used to remove from Cart Screen
                                                   InkWell(
                                                       onTap: () {
+                                                        ///if quantity of  dish is null it initialized as 0
                                                         if (menuList.categoryDishes[i].qty == null) {
                                                           menuList.categoryDishes[i].qty = 0;
                                                         }
+                                                        ///if quantity is zero then there is no need to be remove
                                                         if (menuList.categoryDishes[i].qty != 0) {
                                                           setState(() {
+                                                            ///here remove one quantity from current object
                                                             menuList.categoryDishes[i].qty--;
                                                             if (globals.orderList != null && globals.orderList.isNotEmpty) {
+                                                              ///if quantity is reduced to zero then need to remove the data from cart
                                                               if (menuList.categoryDishes[i].qty == 0) {
                                                                 globals.orderList.remove(menuList.categoryDishes[i]);
                                                               } else {
+                                                                ///if quantity is not zero the we need to replace the value from the cart
                                                                 globals.orderList.forEach((element) {
+                                                                  ///search for the current dish
                                                                   if (element.dishId == menuList.categoryDishes[i].dishId) {
+                                                                    ///if current dish founded then replace the cart with the new quantity
                                                                     element.qty = menuList.categoryDishes[i].qty;
                                                                   }
                                                                 });
@@ -222,21 +229,33 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
                                                   ),
                                                   InkWell(
                                                       onTap: () {
+                                                        ///if quantity of  dish is null it initialized as 0
                                                         if (menuList.categoryDishes[i].qty == null) {
                                                           menuList.categoryDishes[i].qty = 0;
                                                         }
                                                         setState(() {
+                                                          ///here add one more quantity from current object
                                                           menuList.categoryDishes[i]?.qty++;
+                                                          ///Here there is two conditions
+                                                          /// => item may be already present in the cart
+                                                          ///         if item is already present in the list add one more quantity to the item
+                                                          /// => item may not be present in the cart
+                                                          ///         then add the dish to the cart with quantity
+
                                                           bool isInCartFlag = false;
+                                                          ///flag used to check whether it is already in the cart
                                                           if (globals.orderList != null && globals.orderList.isNotEmpty) {
                                                             globals.orderList.forEach((element) {
                                                               if (element.dishId == menuList.categoryDishes[i].dishId) {
+                                                                ///if dish is found in the cart then change the quantity
+                                                                ///set flag as true
                                                                 element.qty = menuList.categoryDishes[i].qty;
                                                                 isInCartFlag = true;
                                                               }
                                                             });
                                                           }
                                                           if (!isInCartFlag) {
+                                                           ///if the element not in the cart then add the current dish object to the cart
                                                             globals.orderList.add(menuList.categoryDishes[i]);
                                                           }
                                                         });
@@ -275,7 +294,7 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
                 )
               : Scaffold(
                   body: Center(
-                    child: Text("Emplty Data"),
+                    child: Text("Empty Data"),
                   ),
                 );
         },

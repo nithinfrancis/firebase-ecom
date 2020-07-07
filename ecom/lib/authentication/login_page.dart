@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ecom/utils/globals.dart' as globals;
 
+///First Screen
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -14,6 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
+  ///Method for sign in with google
   Future<String> signInWithGoogle() async {
     final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
     final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
@@ -50,6 +52,7 @@ class _LoginPageState extends State<LoginPage> {
               InkWell(
                 onTap: () {
                   signInWithGoogle().whenComplete(() {
+                    ///if the sign in with google complete it navigate to homepage
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) {
@@ -93,6 +96,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               InkWell(
                 onTap: () {
+                  ///if the user opt sign in with phone it shows a login page for phone number validation
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) {
